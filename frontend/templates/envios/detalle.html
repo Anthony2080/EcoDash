@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block titulo %}Envío #{{ envio.id_envio }} | EcoDash{% endblock %}
+{% block contenido %}
+<div class="encabezado-sec">
+  <h1><i class="hgi-stroke hgi-delivery-box-01"></i> Envío #{{ envio.id_envio }}</h1>
+  <a class="btn btn-outline" href="{% url 'envios:listado' %}">Volver</a>
+</div>
+<div class="card">
+  <dl class="dl-grid">
+    <dt>Origen</dt>
+    <dd>{{ envio.direccion_origen }}</dd>
+    <dt>Destino</dt>
+    <dd>{{ envio.direccion_destino }}</dd>
+    <dt>Distancia</dt>
+    <dd>{{ envio.distancia_km }} km</dd>
+    <dt>Peso</dt>
+    <dd>{{ envio.peso_kg }} kg</dd>
+    <dt>Estado</dt>
+    <dd>{{ envio.get_estado_display }}</dd>
+    <dt>Precio</dt>
+    <dd>${{ envio.precio }}</dd>
+    <dt>Solicitado</dt>
+    <dd>{{ envio.fecha_solicitud }}</dd>
+    {% if envio.fecha_entrega %}
+    <dt>Entregado</dt>
+    <dd>{{ envio.fecha_entrega }}</dd>
+    {% endif %}
+  </dl>
+</div>
+{% endblock %}

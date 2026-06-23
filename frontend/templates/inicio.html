@@ -1,0 +1,73 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EcoDash — Envíos eco-friendly</title>
+  <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+  <link rel="stylesheet" href="https://use.hugeicons.com/font/icons.css">
+</head>
+<body>
+  <header class="header">
+    <a class="marca" href="/">Eco<span>Dash</span></a>
+    <nav>
+      <a href="#features" title="Características"><i class="hgi-stroke hgi-leaf-01"></i></a>
+      <a href="{% url 'login' %}" title="Ingresar"><i class="hgi-stroke hgi-login-01"></i></a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Logística <span class="resaltado">sostenible</span><br>para el futuro</h1>
+      <p>Conectamos personas y negocios con entregas rápidas, ecológicas y sin complicaciones. Cada envío cuenta.</p>
+      <div class="hero-btns">
+        <a class="btn btn-accion" href="{% url 'login' %}">Comenzar</a>
+        <a class="btn btn-outline" href="#features">Saber más</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <i class="hgi-stroke hgi-delivery-box-01"></i>
+      <i class="hgi-stroke hgi-bicycle-01"></i>
+      <i class="hgi-stroke hgi-leaf-01"></i>
+    </div>
+  </section>
+
+  <section id="features" class="seccion">
+    <h2 class="seccion-titulo">Hecho para el planeta</h2>
+    <p class="seccion-sub">Cada decisión suma. Nuestras prácticas reducen la huella de carbono.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <i class="hgi-stroke hgi-bicycle-01"></i>
+        <h3>Flota verde</h3>
+        <p>Repartidores en bicicleta y vehículos eléctricos para cero emisiones.</p>
+      </div>
+      <div class="feature-card">
+        <i class="hgi-stroke hgi-recycle-01"></i>
+        <h3>Empaques reciclados</h3>
+        <p>Materiales reutilizables y biodegradables en todos nuestros envíos.</p>
+      </div>
+      <div class="feature-card">
+        <i class="hgi-stroke hgi-leaf-01"></i>
+        <h3>Compensación ambiental</h3>
+        <p>Plantamos un árbol por cada 100 envíos completados.</p>
+      </div>
+      <div class="feature-card">
+        <i class="hgi-stroke hgi-package"></i>
+        <h3>Optimización de rutas</h3>
+        <p>IA que minimiza distancias y agrupa entregas para ahorrar energía.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion-cta">
+    <h2>¿Listo para sumarte?</h2>
+    <p>Unite a la red de envíos más sustentable del país.</p>
+    <a class="btn btn-accion" href="{% url 'login' %}">Crear cuenta gratis</a>
+  </section>
+
+  <footer class="footer">
+    <p>EcoDash — Envíos con conciencia</p>
+  </footer>
+</body>
+</html>
