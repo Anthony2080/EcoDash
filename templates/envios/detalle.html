@@ -1,0 +1,3 @@
+{% extends "base.html" %}
+{% block titulo %}Envío #{{ envio.id_envio }} | EcoDash{% endblock %}
+{% block contenido %}<h1>Envío #{{ envio.id_envio }}</h1><dl><dt>Origen</dt><dd>{{ envio.direccion_origen }}</dd><dt>Destino</dt><dd>{{ envio.direccion_destino }}</dd><dt>Estado</dt><dd>{{ envio.get_estado_display }}</dd><dt>Precio</dt><dd>${{ envio.precio }}</dd></dl>{% endblock %}

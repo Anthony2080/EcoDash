@@ -15,6 +15,9 @@ ENV/
 !.env.example
 
 # Django local/runtime files
+db.sqlite3
+db.sqlite3-journal
+db.sqlite3.*
 *.log
 media/
 staticfiles/

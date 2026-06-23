@@ -1,0 +1,3 @@
+{% extends "base.html" %}
+{% block titulo %}Pagos | EcoDash{% endblock %}
+{% block contenido %}<h1>Pagos</h1><ul class="lista">{% for pago in pagos %}<li>Pago #{{ pago.id_pago }} · Envío #{{ pago.id_envio_id }} · ${{ pago.monto }} · {{ pago.estado }}</li>{% empty %}<li>No hay pagos registrados.</li>{% endfor %}</ul>{% endblock %}

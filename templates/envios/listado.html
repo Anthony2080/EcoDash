@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block titulo %}Envíos | EcoDash{% endblock %}
+{% block contenido %}
+<div class="encabezado"><h1>Envíos</h1><a class="boton" href="{% url 'envios:crear' %}">Crear envío</a></div>
+<ul class="lista">{% for envio in envios %}<li><a href="{% url 'envios:detalle' envio.id_envio %}">Envío #{{ envio.id_envio }}</a> · {{ envio.estado }} · {{ envio.direccion_destino }}</li>{% empty %}<li>No hay envíos registrados.</li>{% endfor %}</ul>
+{% endblock %}

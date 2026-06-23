@@ -1,0 +1,3 @@
+{% extends "base.html" %}
+{% block titulo %}Notificaciones | EcoDash{% endblock %}
+{% block contenido %}<h1>Notificaciones</h1><ul class="lista">{% for notificacion in notificaciones %}<li>{{ notificacion.mensaje }} <small>{{ notificacion.fecha }}</small></li>{% empty %}<li>No hay notificaciones.</li>{% endfor %}</ul>{% endblock %}
