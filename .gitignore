@@ -22,6 +22,9 @@ db.sqlite3.*
 media/
 staticfiles/
 
+# Docker volumes
+ecodash_db_data/
+
 # Test and coverage artifacts
 .pytest_cache/
 .coverage
@@ -47,3 +50,6 @@ dist/
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# Server logs
+server.log

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block titulo %}Dashboard | EcoDash{% endblock %}
+{% block header %}
+  {% if user_rol == "repartidor" %}
+    {% include "components/header_repartidor.html" %}
+  {% else %}
+    {% include "components/header_cliente.html" %}
+  {% endif %}
+{% endblock %}
+{% block contenido %}
+<div class="encabezado-sec">
+  <h1>Bienvenido{% if nombre %}, {{ nombre }}{% endif %}</h1>
+</div>
+<div class="dashboard-grid">
+  <div class="dashboard-card">
+    <i class="hgi-stroke hgi-delivery-box-01 card-icon"></i>
+    <h3>Mis envíos</h3>
+    <p>Consultá el estado de tus envíos activos.</p>
+    <a class="btn btn-outline" href="{% url 'envios:listado' %}">Ver envíos</a>
+  </div>
+  <div class="dashboard-card">
+    <i class="hgi-stroke hgi-add-circle card-icon"></i>
+    <h3>Nuevo envío</h3>
+    <p>Creá una solicitud de envío rápida.</p>
+    <a class="btn btn-accion" href="{% url 'envios:crear' %}">Crear</a>
+  </div>
+  <div class="dashboard-card">
+    <i class="hgi-stroke hgi-notification-01 card-icon"></i>
+    <h3>Notificaciones</h3>
+    <p>Últimas actualizaciones de tu cuenta.</p>
+    <a class="btn btn-outline" href="{% url 'notificaciones:listado' %}">Ver</a>
+  </div>
+  <div class="dashboard-card">
+    <i class="hgi-stroke hgi-credit-card-01 card-icon"></i>
+    <h3>Pagos</h3>
+    <p>Historial de pagos realizados.</p>
+    <a class="btn btn-outline" href="{% url 'pagos:listado' %}">Ver pagos</a>
+  </div>
+</div>
+{% endblock %}

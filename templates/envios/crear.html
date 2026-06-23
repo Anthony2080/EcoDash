@@ -1,3 +1,0 @@
-{% extends "base.html" %}
-{% block titulo %}Crear envío | EcoDash{% endblock %}
-{% block contenido %}<h1>Crear envío</h1><form method="post">{% csrf_token %}{{ formulario.as_p }}<button type="submit">Guardar</button></form>{% endblock %}

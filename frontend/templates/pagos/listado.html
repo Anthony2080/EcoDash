@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block titulo %}Pagos | EcoDash{% endblock %}
+{% block contenido %}
+<div class="encabezado-sec"><h1><i class="hgi-stroke hgi-credit-card-01"></i> Pagos</h1></div>
+<ul class="lista-modern">
+  {% for pago in pagos %}
+  <li>
+    <span>
+      <strong>Pago #{{ pago.id_pago }}</strong>
+      <span class="tag">{{ pago.estado }}</span>
+    </span>
+    <span>${{ pago.monto }} · Envío #{{ pago.id_envio_id }}</span>
+  </li>
+  {% empty %}
+  <li>No hay pagos registrados.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
