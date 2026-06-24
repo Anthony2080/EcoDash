@@ -10,7 +10,8 @@ load_dotenv(BASE_DIR / ".env")
 
 SECRET_KEY = os.getenv("SECRET_KEY", "")
 DEBUG = os.getenv("DEBUG", "True").lower() in {"1", "true", "yes", "si"}
-ALLOWED_HOSTS = [host for host in os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",") if host]
+ALLOWED_HOSTS = [host for host in os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1,backend").split(",") if host]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
 
 INSTALLED_APPS = [
     "django.contrib.admin", "django.contrib.auth", "django.contrib.contenttypes",
@@ -58,3 +59,4 @@ STATIC_ROOT = BASE_DIR.parent / "staticfiles"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR.parent / "media"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+LOGIN_REDIRECT_URL = 'panel'

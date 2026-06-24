@@ -22,7 +22,8 @@
     <div class="logo">Eco<span>Dash</span></div>
     <p class="sub">Gestión de envíos inteligente</p>
 
-    <form id="formLogin" method="post">
+    <form id="formLogin" action="/api/login/" method="post">
+      {% csrf_token %}
       <div class="form-group">
         <label for="email">Correo electrónico</label>
         <input class="form-control" type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
@@ -34,7 +35,8 @@
       <button class="btn btn-accion" type="submit">Ingresar</button>
     </form>
 
-    <form id="formRegistro" method="post" class="hidden">
+    <form id="formRegistro" action="/api/registro/" method="post" class="hidden">
+      {% csrf_token %}
       <div class="form-group">
         <label for="reg-nombre">Nombre completo</label>
         <input class="form-control" type="text" id="reg-nombre" name="nombre" placeholder="Tu nombre" required>
@@ -64,6 +66,7 @@
     </div>
   </div>
 
+  <script src="{% static 'js/endpoints.js' %}"></script>
   <script src="{% static 'js/app.js' %}"></script>
 </body>
 </html>

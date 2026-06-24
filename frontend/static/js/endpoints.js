@@ -7,18 +7,38 @@
 const API = (() => {
   const BASE = "";
 
+  function csrfToken() {
+    var match = document.cookie.match(/csrftoken=([^;]+)/);
+    return match ? match[1] : "";
+  }
+
   function peticion(url, opciones = {}) {
-    const config = {
-      headers: { "Content-Type": "application/json", ...opciones.headers },
-      ...opciones,
+    var metodo = (opciones.method || "GET").toUpperCase();
+    var cabeceras = { "Content-Type": "application/json" };
+    if (metodo !== "GET" && metodo !== "HEAD") {
+      cabeceras["X-CSRFToken"] = csrfToken();
+    }
+    var config = {
+      method: metodo,
+      headers: cabeceras,
+      credentials: "include",
     };
-    return fetch(BASE + url, config).then((r) => {
-      if (!r.ok) throw new Error(`Error ${r.status}: ${r.statusText}`);
-      return r.json().catch(() => null);
+    if (opciones.body) config.body = opciones.body;
+    return fetch(BASE + url, config).then(async (r) => {
+      if (!r.ok) {
+        let mensaje = "Error " + r.status;
+        try {
+          var cuerpo = await r.json();
+          if (cuerpo && cuerpo.error) mensaje = cuerpo.error;
+        } catch (_) {
+          mensaje = "Error " + r.status + ": " + r.statusText;
+        }
+        throw new Error(mensaje);
+      }
+      return r.json().catch(function () { return null; });
     });
   }
 
-  /* Normalizador: unifica campos vengan como vengan */
   function normalizarEnvio(data) {
     return {
       id: data.id_envio || data.id || data.envioId,
@@ -59,35 +79,54 @@ const API = (() => {
     };
   }
 
-  /* Endpoints públicos (placeholders) */
   return {
-    login: (email, password) =>
-      peticion("/api/login/", {
+    login: function (email, password) {
+      return peticion("/api/login/", {
         method: "POST",
-        body: JSON.stringify({ email, password }),
-      }),
-    registrar: (datos) =>
-      peticion("/api/registro/", {
+        body: JSON.stringify({ email: email, password: password }),
+      });
+    },
+    registrar: function (datos) {
+      return peticion("/api/registro/", {
         method: "POST",
         body: JSON.stringify({ ...datos, rol: "cliente" }),
-      }),
-    obtenerEnvios: () =>
-      peticion("/api/envios/").then((lista) =>
-        (lista || []).map(normalizarEnvio)
-      ),
-    obtenerEnvio: (id) =>
-      peticion(`/api/envios/${id}/`).then(normalizarEnvio),
-    crearEnvio: (datos) =>
-      peticion("/api/envios/", {
+      });
+    },
+    obtenerEnvios: function () {
+      return peticion("/api/envios/").then(function (lista) {
+        return (lista || []).map(normalizarEnvio);
+      });
+    },
+    obtenerEnvio: function (id) {
+      return peticion("/api/envios/" + id + "/").then(normalizarEnvio);
+    },
+    crearEnvio: function (datos) {
+      return peticion("/api/envios/", {
         method: "POST",
         body: JSON.stringify(datos),
-      }).then(normalizarEnvio),
-    obtenerPagos: () =>
-      peticion("/api/pagos/").then((lista) =>
-        (lista || []).map(normalizarPago)
-      ),
-    normalizarUsuario,
-    normalizarEnvio,
-    normalizarPago,
+      }).then(normalizarEnvio);
+    },
+    obtenerPagos: function () {
+      return peticion("/api/pagos/").then(function (lista) {
+        return (lista || []).map(normalizarPago);
+      });
+    },
+    logout: function () {
+      return peticion("/api/logout/", { method: "POST" });
+    },
+    obtenerNotificaciones: function () {
+      return peticion("/api/notificaciones/").then(function (lista) {
+        return (lista || []).map(function (n) {
+          return {
+            id: n.id_notificacion || n.id,
+            mensaje: n.mensaje,
+            fecha: n.fecha,
+          };
+        });
+      });
+    },
+    normalizarUsuario: normalizarUsuario,
+    normalizarEnvio: normalizarEnvio,
+    normalizarPago: normalizarPago,
   };
 })();

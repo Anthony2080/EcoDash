@@ -363,6 +363,17 @@ main {
 }
 .btn-link:hover { text-decoration: underline; }
 
+/* Error message */
+.login-error, .error-msg {
+  background: #fce4e4;
+  color: #d32f2f;
+  font-size: 0.85rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radio);
+  margin-top: 1rem;
+  text-align: center;
+}
+
 /* Toggle auth */
 .toggle-auth {
   text-align: center;

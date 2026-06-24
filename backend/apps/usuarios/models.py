@@ -7,6 +7,7 @@ class Usuario(models.Model):
     email = models.EmailField(unique=True)
     telefono = models.CharField(max_length=20, blank=True)
     direccion = models.TextField()
+    password = models.CharField(max_length=128)
     rol = models.CharField(max_length=20, choices=ROLES)
     fecha_registro = models.DateTimeField(auto_now_add=True)
 
