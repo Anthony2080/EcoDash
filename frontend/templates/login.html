@@ -10,16 +10,35 @@
 </head>
 <body class="login-page">
   <div class="parallax-bg">
+    <!-- Fila superior izquierda -->
     <i class="hgi-stroke hgi-delivery-box-01 float-icon float-1"></i>
     <i class="hgi-stroke hgi-bicycle-01 float-icon float-2"></i>
-    <i class="hgi-stroke hgi-delivery-box-01 float-icon float-3"></i>
-    <i class="hgi-stroke hgi-bicycle-01 float-icon float-4"></i>
-    <i class="hgi-stroke hgi-delivery-box-01 float-icon float-5"></i>
-    <i class="hgi-stroke hgi-bicycle-01 float-icon float-6"></i>
+    <i class="hgi-stroke hgi-leaf-01 float-icon float-3"></i>
+    <!-- Fila superior derecha -->
+    <i class="hgi-stroke hgi-package float-icon float-4"></i>
+    <i class="hgi-stroke hgi-star float-icon float-5"></i>
+    <i class="hgi-stroke hgi-notification-01 float-icon float-6"></i>
+    <!-- Fila media izquierda -->
+    <i class="hgi-stroke hgi-user-01 float-icon float-7"></i>
+    <i class="hgi-stroke hgi-credit-card-01 float-icon float-8"></i>
+    <!-- Fila media derecha -->
+    <i class="hgi-stroke hgi-delivery-box-01 float-icon float-9"></i>
+    <i class="hgi-stroke hgi-bicycle-01 float-icon float-10"></i>
+    <!-- Fila inferior izquierda -->
+    <i class="hgi-stroke hgi-leaf-01 float-icon float-11"></i>
+    <i class="hgi-stroke hgi-package float-icon float-12"></i>
+    <!-- Fila inferior derecha -->
+    <i class="hgi-stroke hgi-star float-icon float-13"></i>
+    <i class="hgi-stroke hgi-user-01 float-icon float-14"></i>
+    <i class="hgi-stroke hgi-notification-01 float-icon float-15"></i>
+    <i class="hgi-stroke hgi-credit-card-01 float-icon float-16"></i>
   </div>
 
   <div class="login-card">
-    <div class="logo">Eco<span>Dash</span></div>
+    <div class="login-header">
+      <a href="/" class="btn-back" title="Volver al inicio"><i class="hgi-stroke hgi-arrow-left-01"></i> Volver</a>
+      <div class="logo-centrado"><img src="{% static 'img/logo-ecodash.png' %}" alt="EcoDash" height="60"></div>
+    </div>
     <p class="sub">Gestión de envíos inteligente</p>
 
     <form id="formLogin" action="/api/login/" method="post">

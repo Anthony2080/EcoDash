@@ -10,26 +10,34 @@
 </head>
 <body>
   <header class="header">
-    <a class="marca" href="/">Eco<span>Dash</span></a>
+    <a class="marca" href="/"><img src="{% static 'img/logo-ecodash.png' %}" alt="EcoDash" height="45"></a>
+    <button class="hamburger" aria-label="Menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <nav>
+      <a href="#" title="Clientes">Clientes</a>
+      <a href="#" title="Repartidores">Repartidores</a>
       <a href="#features" title="Características"><i class="hgi-stroke hgi-leaf-01"></i></a>
       <a href="{% url 'login' %}" title="Ingresar"><i class="hgi-stroke hgi-login-01"></i></a>
     </nav>
   </header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Logística <span class="resaltado">sostenible</span><br>para el futuro</h1>
-      <p>Conectamos personas y negocios con entregas rápidas, ecológicas y sin complicaciones. Cada envío cuenta.</p>
-      <div class="hero-btns">
-        <a class="btn btn-accion" href="{% url 'login' %}">Comenzar</a>
-        <a class="btn btn-outline" href="#features">Saber más</a>
+{% static 'img/hero-1.jpg' as img1 %}
+{% static 'img/hero-2.jpg' as img2 %}
+{% static 'img/hero-3.jpg' as img3 %}
+  <section class="hero" id="hero">
+    <div class="hero-slide" style="background-image: url('{{ img1 }}')"></div>
+    <div class="hero-slide" style="background-image: url('{{ img2 }}')"></div>
+    <div class="hero-slide" style="background-image: url('{{ img3 }}')"></div>
+    <div class="hero-overlay">
+      <div class="hero-content">
+        <h1>Logística <span class="resaltado">sostenible</span><br>para el futuro</h1>
+        <p>Envíos rápidos y ecológicos en todo el AMBA. Conectamos personas y negocios sin complicaciones.</p>
+        <div class="hero-btns">
+          <a class="btn btn-accion" href="{% url 'login' %}">Comenzar</a>
+          <a class="btn btn-outline" href="#features">Saber más</a>
+        </div>
       </div>
-    </div>
-    <div class="hero-visual">
-      <i class="hgi-stroke hgi-delivery-box-01"></i>
-      <i class="hgi-stroke hgi-bicycle-01"></i>
-      <i class="hgi-stroke hgi-leaf-01"></i>
     </div>
   </section>
 
@@ -43,14 +51,14 @@
         <p>Repartidores en bicicleta y vehículos eléctricos para cero emisiones.</p>
       </div>
       <div class="feature-card">
-        <i class="hgi-stroke hgi-recycle-01"></i>
-        <h3>Empaques reciclados</h3>
-        <p>Materiales reutilizables y biodegradables en todos nuestros envíos.</p>
+        <i class="hgi-stroke hgi-user-group"></i>
+        <h3>Repartidores independientes</h3>
+        <p>Cualquier persona puede registrarse y sumarse como repartidor, generando ingresos a su ritmo.</p>
       </div>
       <div class="feature-card">
-        <i class="hgi-stroke hgi-leaf-01"></i>
-        <h3>Compensación ambiental</h3>
-        <p>Plantamos un árbol por cada 100 envíos completados.</p>
+        <i class="hgi-stroke hgi-globe"></i>
+        <h3>Cobertura amplia</h3>
+        <p>Llegamos a más zonas gracias a una red distribuida de repartidores en todo el AMBA.</p>
       </div>
       <div class="feature-card">
         <i class="hgi-stroke hgi-package"></i>
@@ -60,14 +68,36 @@
     </div>
   </section>
 
+
   <section class="seccion seccion-cta">
     <h2>¿Listo para sumarte?</h2>
-    <p>Unite a la red de envíos más sustentable del país.</p>
+    <p>Unite a la red de envíos más sustentable del AMBA.</p>
     <a class="btn btn-accion" href="{% url 'login' %}">Crear cuenta gratis</a>
   </section>
 
   <footer class="footer">
     <p>EcoDash — Envíos con conciencia</p>
   </footer>
+  <script>
+    document.querySelector('.hamburger')?.addEventListener('click', function() {
+      var nav = this.nextElementSibling;
+      var expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('nav-open');
+    });
+
+    /* Carrusel */
+    (function() {
+      var slides = document.querySelectorAll('.hero-slide');
+      if (!slides.length) return;
+      var current = 0;
+      slides[0].classList.add('active');
+      setInterval(function() {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+      }, 6000);
+    })();
+  </script>
 </body>
 </html>
