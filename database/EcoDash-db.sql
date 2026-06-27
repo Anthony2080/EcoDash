@@ -13,7 +13,6 @@ CREATE TABLE usuario (
     direccion TEXT NOT NULL,
     password VARCHAR(128) NOT NULL,
     rol ENUM('cliente', 'repartidor') NOT NULL,
-    fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 # Cliente
@@ -28,7 +27,6 @@ CREATE TABLE usuario_repartidor (
     id_repartidor INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL UNIQUE,
     disponibilidad BOOLEAN NOT NULL DEFAULT TRUE,
-    calificacion DECIMAL(7,2) NOT NULL DEFAULT 00000.00,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE
 );
 
