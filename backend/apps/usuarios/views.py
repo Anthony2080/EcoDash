@@ -37,7 +37,6 @@ def _serializar_usuario(usuario):
         "telefono": usuario.telefono,
         "direccion": usuario.direccion,
         "rol": usuario.rol,
-        "fecha_registro": usuario.fecha_registro.isoformat(),
     }
 
 

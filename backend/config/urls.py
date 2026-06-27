@@ -21,7 +21,6 @@ urlpatterns = [
     path("api/envios/<int:id_envio>/", api_detalle_envio, name="api_detalle_envio"),
     path("api/pagos/", api_listado_pagos, name="api_pagos"),
     path("api/notificaciones/", api_listado_notificaciones, name="api_notificaciones"),
-    path("admin/", admin.site.urls),
     path("usuarios/", include("apps.usuarios.urls")),
     path("clientes/", include("apps.clientes.urls")),
     path("repartidores/", include("apps.repartidores.urls")),
