@@ -1,0 +1,5 @@
+<form method="post" data-form="crear-envio">
+  {% csrf_token %}
+  {{ formulario.as_p }}
+  <button class="btn btn-accion" type="submit"><i class="hgi-stroke hgi-save-01"></i> Guardar</button>
+</form>

@@ -11,8 +11,8 @@ from apps.pagos.views import api_listado as api_listado_pagos
 from apps.usuarios.views import dashboard_view, login_api, logout_api, registro_api
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="inicio.html"), name="inicio"),
-    path("acceso/", TemplateView.as_view(template_name="login.html"), name="login"),
+    path("", TemplateView.as_view(template_name="paginas/inicio.html"), name="inicio"),
+    path("acceso/", TemplateView.as_view(template_name="paginas/acceso.html"), name="login"),
     path("panel/", dashboard_view, name="dashboard"),
     path("api/login/", login_api, name="api_login"),
     path("api/registro/", registro_api, name="api_registro"),

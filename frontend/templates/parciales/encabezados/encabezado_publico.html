@@ -1,0 +1,13 @@
+{% load static %}
+<header class="header">
+  <a class="marca" href="/"><img src="{% static 'img/logo-ecodash.png' %}" alt="EcoDash" height="45"></a>
+  <button class="hamburger" aria-label="Menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav>
+    <a href="#" title="Clientes">Clientes</a>
+    <a href="#" title="Repartidores">Repartidores</a>
+    <a href="#features" title="Características"><i class="hgi-stroke hgi-leaf-01"></i></a>
+    <a href="{% url 'login' %}" title="Ingresar"><i class="hgi-stroke hgi-login-01"></i></a>
+  </nav>
+</header>

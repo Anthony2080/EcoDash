@@ -1,21 +1,5 @@
-{% extends "base.html" %}
+{% extends "estructuras/privada.html" %}
 {% block titulo %}Envíos | EcoDash{% endblock %}
 {% block contenido %}
-<div class="encabezado-sec">
-  <h1><i class="hgi-stroke hgi-delivery-box-01"></i> Envíos</h1>
-  <a class="btn btn-accion" href="{% url 'envios:crear' %}"><i class="hgi-stroke hgi-add-circle"></i> Nuevo</a>
-</div>
-<ul class="lista-modern">
-  {% for envio in envios %}
-  <li>
-    <span>
-      <strong>Envío #{{ envio.id_envio }}</strong>
-      <span class="tag">{{ envio.get_estado_display|default:envio.estado }}</span>
-    </span>
-    <a href="{% url 'envios:detalle' envio.id_envio %}">Ver detalle</a>
-  </li>
-  {% empty %}
-  <li>No hay envíos registrados.</li>
-  {% endfor %}
-</ul>
+{% include "parciales/secciones/envios.html" %}
 {% endblock %}

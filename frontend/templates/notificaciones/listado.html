@@ -1,15 +1,5 @@
-{% extends "base.html" %}
+{% extends "estructuras/privada.html" %}
 {% block titulo %}Notificaciones | EcoDash{% endblock %}
 {% block contenido %}
-<div class="encabezado-sec"><h1><i class="hgi-stroke hgi-notification-01"></i> Notificaciones</h1></div>
-<ul class="lista-modern">
-  {% for notificacion in notificaciones %}
-  <li>
-    <span>{{ notificacion.mensaje }}</span>
-    <span class="tag">{{ notificacion.fecha }}</span>
-  </li>
-  {% empty %}
-  <li>No hay notificaciones.</li>
-  {% endfor %}
-</ul>
+{% include "parciales/secciones/notificaciones.html" %}
 {% endblock %}

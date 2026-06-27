@@ -1,14 +1,5 @@
-{% extends "base.html" %}
+{% extends "estructuras/privada.html" %}
 {% block titulo %}Nuevo envío | EcoDash{% endblock %}
 {% block contenido %}
-<div class="encabezado-sec">
-  <h1><i class="hgi-stroke hgi-add-circle"></i> Nuevo envío</h1>
-</div>
-<div class="card card-sm" style="max-width:560px">
-  <form method="post">
-    {% csrf_token %}
-    {{ formulario.as_p }}
-    <button class="btn btn-accion" type="submit"><i class="hgi-stroke hgi-save-01"></i> Guardar</button>
-  </form>
-</div>
+{% include "parciales/secciones/crear_envio.html" %}
 {% endblock %}

@@ -1,0 +1,8 @@
+{% load static %}
+<header class="header">
+  <img src="{% static 'img/logo-ecodash.png' %}" alt="EcoDash" height="45">
+  <button class="hamburger" aria-label="Menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  {% include "parciales/navegacion/navegacion_cliente.html" %}
+</header>

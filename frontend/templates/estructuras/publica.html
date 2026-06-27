@@ -1,0 +1,18 @@
+{% extends "estructuras/base.html" %}
+{% block cuerpo %}
+  {% block encabezado %}
+    {% include "parciales/encabezados/encabezado_publico.html" %}
+  {% endblock %}
+  {% block contenido %}{% endblock %}
+{% endblock %}
+{% block scripts %}
+  <script>
+    document.querySelector('.hamburger')?.addEventListener('click', function() {
+      var nav = this.nextElementSibling;
+      var expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('nav-open');
+    });
+  </script>
+  {% block scripts_pagina %}{% endblock %}
+{% endblock %}

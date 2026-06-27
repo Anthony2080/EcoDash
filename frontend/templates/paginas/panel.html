@@ -1,0 +1,31 @@
+{% extends "estructuras/privada.html" %}
+{% block titulo %}Dashboard | EcoDash{% endblock %}
+{% block encabezado %}
+  {% if user_rol == "cliente" %}
+    {% include "parciales/encabezados/encabezado_cliente.html" %}
+  {% elif user_rol == "repartidor" %}
+    {% include "parciales/encabezados/encabezado_repartidor.html" %}
+  {% else %}
+    {% include "parciales/encabezados/encabezado_publico.html" %}
+  {% endif %}
+{% endblock %}
+{% block contenido %}
+<!-- user_rol: {{ user_rol }} -->
+<div class="encabezado-sec">
+  <h1>Bienvenido{% if usuario_nombre %}, {{ usuario_nombre }}{% endif %}</h1>
+</div>
+{% if user_rol == "cliente" %}
+  {% include "parciales/secciones/resumen_cliente.html" %}
+{% elif user_rol == "repartidor" %}
+  {% include "parciales/secciones/resumen_repartidor.html" %}
+{% else %}
+  <section class="dashboard-grid">
+    <div class="dashboard-card">
+      <i class="hgi-stroke hgi-alert-02 card-icon"></i>
+      <h3>Sesion no valida</h3>
+      <p>No pudimos identificar el rol de tu cuenta. Cerra sesion e ingresa nuevamente.</p>
+      <a class="btn btn-accion" href="{% url 'api_logout' %}">Volver a ingresar</a>
+    </div>
+  </section>
+{% endif %}
+{% endblock %}

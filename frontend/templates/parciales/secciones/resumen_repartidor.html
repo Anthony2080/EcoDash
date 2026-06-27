@@ -1,0 +1,26 @@
+<div class="dashboard-grid">
+  <div class="dashboard-card">
+    <i class="hgi-stroke hgi-package card-icon"></i>
+    <h3>Entregas disponibles</h3>
+    <p>Revisa solicitudes pendientes para tomar nuevas entregas.</p>
+    <a class="btn btn-outline" href="{% url 'envios:listado' %}">Ver disponibles</a>
+  </div>
+  <div class="dashboard-card">
+    <i class="hgi-stroke hgi-delivery-box-01 card-icon"></i>
+    <h3>Entregas asignadas</h3>
+    <p>Consulta los envios que tenes asignados.</p>
+    <a class="btn btn-accion" href="{% url 'envios:listado' %}">Ver asignadas</a>
+  </div>
+  <div class="dashboard-card">
+    <i class="hgi-stroke hgi-time-quarter-pass card-icon"></i>
+    <h3>Historial</h3>
+    <p>Revisa entregas completadas y actividad reciente.</p>
+    <a class="btn btn-outline" href="{% url 'envios:listado' %}">Ver historial</a>
+  </div>
+  <div class="dashboard-card">
+    <i class="hgi-stroke hgi-notification-01 card-icon"></i>
+    <h3>Notificaciones</h3>
+    <p>Ultimas novedades sobre tus entregas.</p>
+    <a class="btn btn-outline" href="{% url 'notificaciones:listado' %}">Ver</a>
+  </div>
+</div>

@@ -1,7 +1,0 @@
-SECRET_KEY=HPQdBkrBHQCg5RcMqTqsnVAIOLusiAZDtNMro4uto90HQZqbEze3tg3VT4QpWnrozSw
-DEBUG=True
-DB_NAME=EcoDash_db
-DB_USER=root
-DB_PASSWORD=root
-DB_HOST=localhost
-DB_PORT=3306

@@ -1,27 +1,7 @@
+{% extends "estructuras/publica.html" %}
 {% load static %}
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>EcoDash — Envíos eco-friendly</title>
-  <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
-  <link rel="stylesheet" href="https://use.hugeicons.com/font/icons.css">
-</head>
-<body>
-  <header class="header">
-    <a class="marca" href="/"><img src="{% static 'img/logo-ecodash.png' %}" alt="EcoDash" height="45"></a>
-    <button class="hamburger" aria-label="Menú" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <nav>
-      <a href="#" title="Clientes">Clientes</a>
-      <a href="#" title="Repartidores">Repartidores</a>
-      <a href="#features" title="Características"><i class="hgi-stroke hgi-leaf-01"></i></a>
-      <a href="{% url 'login' %}" title="Ingresar"><i class="hgi-stroke hgi-login-01"></i></a>
-    </nav>
-  </header>
-
+{% block titulo %}EcoDash — Envíos eco-friendly{% endblock %}
+{% block contenido %}
 {% static 'img/hero-1.jpg' as img1 %}
 {% static 'img/hero-2.jpg' as img2 %}
 {% static 'img/hero-3.jpg' as img3 %}
@@ -68,7 +48,6 @@
     </div>
   </section>
 
-
   <section class="seccion seccion-cta">
     <h2>¿Listo para sumarte?</h2>
     <p>Unite a la red de envíos más sustentable del AMBA.</p>
@@ -78,15 +57,9 @@
   <footer class="footer">
     <p>EcoDash — Envíos con conciencia</p>
   </footer>
+{% endblock %}
+{% block scripts_pagina %}
   <script>
-    document.querySelector('.hamburger')?.addEventListener('click', function() {
-      var nav = this.nextElementSibling;
-      var expanded = this.getAttribute('aria-expanded') === 'true';
-      this.setAttribute('aria-expanded', !expanded);
-      nav.classList.toggle('nav-open');
-    });
-
-    /* Carrusel */
     (function() {
       var slides = document.querySelectorAll('.hero-slide');
       if (!slides.length) return;
@@ -99,5 +72,4 @@
       }, 6000);
     })();
   </script>
-</body>
-</html>
+{% endblock %}

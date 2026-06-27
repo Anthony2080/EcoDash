@@ -31,7 +31,10 @@
       var email = document.getElementById("email").value;
       var password = document.getElementById("password").value;
       API.login(email, password)
-        .then(function () {
+        .then(function (usuario) {
+          if (usuario && usuario.rol) {
+            sessionStorage.setItem("usuario_rol", usuario.rol);
+          }
           window.location.href = "/panel/";
         })
         .catch(function (err) {
@@ -43,15 +46,22 @@
   if (formRegistro) {
     formRegistro.addEventListener("submit", function (e) {
       e.preventDefault();
+      var rol = document.getElementById("reg-rol").value;
       var datos = {
         nombre: document.getElementById("reg-nombre").value,
         email: document.getElementById("reg-email").value,
         telefono: document.getElementById("reg-telefono").value,
         direccion: document.getElementById("reg-direccion").value,
+        rol: rol,
         password: document.getElementById("reg-password").value,
       };
+      console.log("ROL FORMULARIO:", rol);
+      console.log("PAYLOAD REGISTRO:", datos);
       API.registrar(datos)
-        .then(function () {
+        .then(function (usuario) {
+          if (usuario && usuario.rol) {
+            sessionStorage.setItem("usuario_rol", usuario.rol);
+          }
           window.location.href = "/panel/";
         })
         .catch(function (err) {

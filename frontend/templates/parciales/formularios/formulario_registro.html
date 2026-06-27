@@ -1,0 +1,31 @@
+<form id="formRegistro" action="/api/registro/" method="post" class="hidden">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="reg-nombre">Nombre completo</label>
+    <input class="form-control" type="text" id="reg-nombre" name="nombre" placeholder="Tu nombre" required>
+  </div>
+  <div class="form-group">
+    <label for="reg-email">Correo electronico</label>
+    <input class="form-control" type="email" id="reg-email" name="email" placeholder="ejemplo@correo.com" required>
+  </div>
+  <div class="form-group">
+    <label for="reg-telefono">Telefono</label>
+    <input class="form-control" type="tel" id="reg-telefono" name="telefono" placeholder="11 1234 5678">
+  </div>
+  <div class="form-group">
+    <label for="reg-direccion">Direccion</label>
+    <input class="form-control" type="text" id="reg-direccion" name="direccion" placeholder="Calle y numero">
+  </div>
+  <div class="form-group">
+    <label for="reg-rol">Tipo de cuenta</label>
+    <select class="form-control" id="reg-rol" name="rol" required>
+      <option value="cliente">Cliente</option>
+      <option value="repartidor">Repartidor</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="reg-password">Contrasena</label>
+    <input class="form-control" type="password" id="reg-password" name="password" placeholder="********" required>
+  </div>
+  <button class="btn btn-accion" type="submit">Crear cuenta</button>
+</form>
