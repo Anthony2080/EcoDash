@@ -1,1 +1,13 @@
 {% extends "dashboard.html" %}
+{% load static %}
+{% block titulo %}Mis rutas | EcoDash{% endblock %}
+{% block contenido %}
+{{ block.super }}
+<div class="card">
+  <h2><i class="hgi-stroke hgi-route"></i> Mi ruta del día</h2>
+  <div id="mapa-ruta" style="height:450px; border-radius:8px;"></div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{% static 'js/mapas.js' %}"></script>
+{% endblock %}

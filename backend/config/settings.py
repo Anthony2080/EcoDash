@@ -15,6 +15,7 @@ ALLOWED_HOSTS = [host for host in os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.
 INSTALLED_APPS = [
     "django.contrib.admin", "django.contrib.auth", "django.contrib.contenttypes",
     "django.contrib.sessions", "django.contrib.messages", "django.contrib.staticfiles",
+    "rest_framework",
     "apps.usuarios.apps.UsuariosConfig",
     "apps.clientes.apps.ClientesConfig",
     "apps.repartidores.apps.RepartidoresConfig",

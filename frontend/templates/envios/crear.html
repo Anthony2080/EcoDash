@@ -1,14 +1,24 @@
 {% extends "base.html" %}
+{% load static %}
 {% block titulo %}Nuevo envío | EcoDash{% endblock %}
 {% block contenido %}
 <div class="encabezado-sec">
   <h1><i class="hgi-stroke hgi-add-circle"></i> Nuevo envío</h1>
 </div>
 <div class="card card-sm" style="max-width:560px">
-  <form method="post">
+  <form method="post" id="form-envio">
     {% csrf_token %}
     {{ formulario.as_p }}
     <button class="btn btn-accion" type="submit"><i class="hgi-stroke hgi-save-01"></i> Guardar</button>
   </form>
 </div>
+<div class="card" style="margin-top:1rem;">
+  <h2>Seleccioná ubicaciones en el mapa</h2>
+  <p>Hacé clic para marcar <strong>origen</strong> y luego <strong>destino</strong>.</p>
+  <div id="mapa-crear" style="height:400px; border-radius:8px;"></div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/mapas.js' %}"></script>
 {% endblock %}

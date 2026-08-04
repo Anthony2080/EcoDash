@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block titulo %}EcoDash{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="https://use.hugeicons.com/font/icons.css">
 </head>
 <body>
@@ -22,5 +23,8 @@
   </header>
   {% endblock %}
   <main>{% block contenido %}{% endblock %}</main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="{% static 'js/app.js' %}"></script>
+  {% block extra_scripts %}{% endblock %}
 </body>
 </html>
