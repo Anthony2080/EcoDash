@@ -25,4 +25,15 @@
     {% endif %}
   </dl>
 </div>
+<div class="card">
+  <h2>Mapa del envío</h2>
+  <div id="mapa-detalle" style="height:400px; border-radius:8px;"></div>
+</div>
+<script>
+  window.envioData = {
+    id: {{ envio.id_envio }},
+    origen: { lat: {{ envio.lat_origen|default:"null" }}, lng: {{ envio.lng_origen|default:"null" }}, dir: "{{ envio.direccion_origen|escapejs }}" },
+    destino: { lat: {{ envio.lat_destino|default:"null" }}, lng: {{ envio.lng_destino|default:"null" }}, dir: "{{ envio.direccion_destino|escapejs }}" },
+  };
+</script>
 </section>

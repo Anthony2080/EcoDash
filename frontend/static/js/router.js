@@ -32,6 +32,10 @@
       var datos = {
         direccion_origen: fd.get("direccion_origen"),
         direccion_destino: fd.get("direccion_destino"),
+        lat_origen: fd.get("lat_origen"),
+        lng_origen: fd.get("lng_origen"),
+        lat_destino: fd.get("lat_destino"),
+        lng_destino: fd.get("lng_destino"),
         distancia_km: fd.get("distancia_km"),
         peso_kg: fd.get("peso_kg"),
         precio: fd.get("precio"),

@@ -69,6 +69,10 @@ const API = (() => {
     return {
       direccion_origen: valor(datos, ["direccion_origen", "origen", "origenGeo"], ""),
       direccion_destino: valor(datos, ["direccion_destino", "destino", "destinoGeo"], ""),
+      lat_origen: valor(datos, ["lat_origen", "latOrigen"], ""),
+      lng_origen: valor(datos, ["lng_origen", "lngOrigen"], ""),
+      lat_destino: valor(datos, ["lat_destino", "latDestino"], ""),
+      lng_destino: valor(datos, ["lng_destino", "lngDestino"], ""),
       distancia_km: valor(datos, ["distancia_km", "distanciaKm", "distancia"], ""),
       peso_kg: valor(datos, ["peso_kg", "pesoKg", "peso"], ""),
       precio: valor(datos, ["precio", "monto"], ""),

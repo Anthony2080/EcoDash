@@ -22,6 +22,10 @@ def _serializar(envio):
         "id_repartidor": envio.id_repartidor_id,
         "fecha_solicitud": envio.fecha_solicitud.isoformat(),
         "fecha_entrega": envio.fecha_entrega.isoformat() if envio.fecha_entrega else None,
+        "lat_origen": str(envio.lat_origen) if envio.lat_origen is not None else None,
+        "lng_origen": str(envio.lng_origen) if envio.lng_origen is not None else None,
+        "lat_destino": str(envio.lat_destino) if envio.lat_destino is not None else None,
+        "lng_destino": str(envio.lng_destino) if envio.lng_destino is not None else None,
         "cliente_nombre": envio.id_cliente.id_usuario.nombre if hasattr(envio, "id_cliente") and envio.id_cliente else None,
         "repartidor_nombre": envio.id_repartidor.id_usuario.nombre if hasattr(envio, "id_repartidor") and envio.id_repartidor else None,
     }
@@ -78,6 +82,10 @@ def api_envios(request):
             peso_kg=data["peso_kg"],
             precio=data["precio"],
             estado=data.get("estado", "pendiente"),
+            lat_origen=data.get("lat_origen") or None,
+            lng_origen=data.get("lng_origen") or None,
+            lat_destino=data.get("lat_destino") or None,
+            lng_destino=data.get("lng_destino") or None,
         )
         return JsonResponse(_serializar(envio), status=201)
 
