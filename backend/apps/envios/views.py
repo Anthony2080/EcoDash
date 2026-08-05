@@ -78,6 +78,8 @@ def detalle(request, id_envio):
 
 
 def crear(request):
+    if not request.session.get("usuario_id"):
+        return redirect("login")
     if request.session.get("usuario_rol") == "repartidor":
         return redirect("envios:listado")
 
@@ -91,12 +93,15 @@ def crear(request):
         pass
 
     formulario = EnvioForm(request.POST or None)
-    if request.method == "POST" and formulario.is_valid():
-        envio = formulario.save(commit=False)
-        envio.id_cliente = cliente
-        envio.precio = calcular_precio(envio.distancia_km, envio.peso_kg)
-        envio.save()
-        return redirect("envios:detalle", id_envio=envio.id_envio)
+    if request.method == "POST":
+        if formulario.is_valid() and cliente is not None:
+            envio = formulario.save(commit=False)
+            envio.id_cliente = cliente
+            envio.precio = calcular_precio(envio.distancia_km, envio.peso_kg)
+            envio.save()
+            return redirect("envios:detalle", id_envio=envio.id_envio)
+        elif cliente is None:
+            formulario.add_error(None, "Tu cuenta no tiene un perfil de cliente. Contactá al administrador.")
 
     contexto["formulario"] = formulario
     return render(request, "envios/crear.html", contexto)

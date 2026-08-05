@@ -1,4 +1,4 @@
-<form method="post" data-form="crear-envio">
+<form method="post" action="{% url 'envios:crear' %}" data-form="crear-envio" novalidate>
   {% csrf_token %}
   {{ formulario.non_field_errors }}
   <p><strong>Cliente:</strong> {{ nombre }}</p>

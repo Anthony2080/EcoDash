@@ -100,6 +100,32 @@
 
   function inicializarNotificaciones() {}
 
+  function _geocodificar(direccion, cb) {
+    if (typeof window.geocodificarAdelante === "function") {
+      window.geocodificarAdelante(direccion, cb);
+      return;
+    }
+    var url = "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" + encodeURIComponent(direccion);
+    fetch(url, { headers: { "Accept-Language": "es" } })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!data || !data[0]) { cb(null); return; }
+        cb({ lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) });
+      })
+      .catch(function () { cb(null); });
+  }
+
+  function _distanciaKm(a, b) {
+    var R = 6371;
+    var dLat = (b.lat - a.lat) * Math.PI / 180;
+    var dLng = (b.lng - a.lng) * Math.PI / 180;
+    var la = a.lat * Math.PI / 180;
+    var lb = b.lat * Math.PI / 180;
+    var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(la) * Math.cos(lb) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+
   function inicializarCrearEnvio() {
     var form = document.querySelector('form[data-form="crear-envio"]');
     if (!form) return;
@@ -111,25 +137,45 @@
       e.preventDefault();
 
       var fd = new FormData(form);
-      var datos = {
-        direccion_origen: fd.get("direccion_origen"),
-        direccion_destino: fd.get("direccion_destino"),
-        lat_origen: fd.get("lat_origen"),
-        lng_origen: fd.get("lng_origen"),
-        lat_destino: fd.get("lat_destino"),
-        lng_destino: fd.get("lng_destino"),
-        distancia_km: fd.get("distancia_km"),
-        peso_kg: fd.get("peso_kg"),
-      };
+      var direccion_origen = (fd.get("direccion_origen") || "").trim();
+      var direccion_destino = (fd.get("direccion_destino") || "").trim();
+      var distancia_km = (fd.get("distancia_km") || "").trim();
+      var peso_kg = (fd.get("peso_kg") || "").trim();
+      var lat_origen = fd.get("lat_origen");
+      var lng_origen = fd.get("lng_origen");
+      var lat_destino = fd.get("lat_destino");
+      var lng_destino = fd.get("lng_destino");
       var btn = form.querySelector("button[type=submit]");
       var textoOriginal = btn ? btn.innerHTML : "";
 
-      if (btn) {
-        btn.disabled = true;
-        btn.textContent = "Guardando...";
+      function mostrar(mensaje) {
+        mostrarError(form, mensaje, btn);
       }
 
-      try {
+      if (!direccion_origen || !direccion_destino) {
+        mostrar("Completá las direcciones de origen y destino.");
+        return;
+      }
+      if (!peso_kg) {
+        mostrar("Ingresá el peso (kg).");
+        return;
+      }
+
+      function enviar() {
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = "Guardando...";
+        }
+        var datos = {
+          direccion_origen: direccion_origen,
+          direccion_destino: direccion_destino,
+          lat_origen: lat_origen,
+          lng_origen: lng_origen,
+          lat_destino: lat_destino,
+          lng_destino: lng_destino,
+          distancia_km: distancia_km,
+          peso_kg: peso_kg,
+        };
         API.crearEnvio(datos)
           .then(function (envio) {
             window.location.href = "/envios/" + envio.id + "/";
@@ -139,16 +185,44 @@
               btn.disabled = false;
               btn.innerHTML = textoOriginal || '<i class="hgi-stroke hgi-save-01"></i> Guardar';
             }
-            mostrarError(form, err.message, btn);
+            mostrar(err.message);
             alert(err.message);
           });
-      } catch (err) {
-        if (btn) {
-          btn.disabled = false;
-          btn.innerHTML = textoOriginal || '<i class="hgi-stroke hgi-save-01"></i> Guardar';
-        }
-        alert("Error inesperado: " + err.message);
       }
+
+      if (distancia_km) {
+        enviar();
+        return;
+      }
+
+      if (!lat_origen || !lng_origen || !lat_destino || !lng_destino) {
+        _geocodificar(direccion_origen, function (o) {
+          _geocodificar(direccion_destino, function (d) {
+            if (!o || !d) {
+              mostrar("Seleccioná origen y destino en el mapa (o presioná Enter en cada dirección) para calcular la distancia.");
+              return;
+            }
+            lat_origen = o.lat;
+            lng_origen = o.lng;
+            lat_destino = d.lat;
+            lng_destino = d.lng;
+            distancia_km = _distanciaKm(o, d).toFixed(2);
+            var campos = {
+              "id_distancia_km": distancia_km,
+              "id_lat_origen": lat_origen,
+              "id_lng_origen": lng_origen,
+              "id_lat_destino": lat_destino,
+              "id_lng_destino": lng_destino,
+            };
+            for (var id in campos) {
+              if (document.getElementById(id)) document.getElementById(id).value = campos[id];
+            }
+            enviar();
+          });
+        });
+        return;
+      }
+      enviar();
     });
   }
 

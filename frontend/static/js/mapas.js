@@ -28,9 +28,11 @@ function initMapaDetalle() {
 
 /* ----- Cálculo de precio ----- */
 function actualizarPrecio() {
-  var distancia = parseFloat(document.getElementById("id_distancia_km").value) || 0;
-  var peso = parseFloat(document.getElementById("id_peso_kg").value) || 0;
-  var precio = 1000 + distancia * 150 + peso * 200;
+  var dist = document.getElementById("id_distancia_km");
+  var peso = document.getElementById("id_peso_kg");
+  var distancia = dist ? parseFloat(dist.value) || 0 : 0;
+  var pesoKg = peso ? parseFloat(peso.value) || 0 : 0;
+  var precio = 1000 + distancia * 150 + pesoKg * 200;
   precio = Math.max(1000, Math.min(6000, Math.round(precio)));
   var destino = document.getElementById("precio-estimado");
   if (destino) destino.textContent = "$" + precio;
@@ -244,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var distInput = document.getElementById("id_distancia_km");
   if (pesoInput) pesoInput.addEventListener("input", actualizarPrecio);
   if (distInput) distInput.addEventListener("input", actualizarPrecio);
-  actualizarPrecio();
+  if (pesoInput || distInput) actualizarPrecio();
   if (document.getElementById("mapa-detalle")) initMapaDetalle();
   if (document.getElementById("mapa-crear")) initMapaCrear();
   if (document.getElementById("mapa-ruta")) initMapaRuta();
