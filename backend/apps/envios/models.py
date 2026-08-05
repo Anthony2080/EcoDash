@@ -23,6 +23,7 @@ class Envio(models.Model):
     foto_entrega_url = models.URLField(blank=True)
     firma_digital = models.TextField(blank=True)
     fecha_solicitud = models.DateTimeField(auto_now_add=True)
+    fecha_estado = models.DateTimeField(auto_now=True)
     fecha_entrega = models.DateTimeField(null=True, blank=True)
 
     class Meta:

@@ -1,7 +1,29 @@
 <section data-seccion="envios">
 <div class="encabezado-sec">
   <h1><i class="hgi-stroke hgi-delivery-box-01"></i> Envíos</h1>
+  {% if user_rol != "repartidor" %}
   <a class="btn btn-accion" href="{% url 'envios:crear' %}"><i class="hgi-stroke hgi-add-circle"></i> Nuevo</a>
+  {% endif %}
 </div>
-{% include "parciales/listas/lista_envios.html" %}
+{% if user_rol == "repartidor" %}
+<div class="dashboard-grid">
+  <div class="dashboard-card">
+    <h3>Envíos disponibles</h3>
+    <p>Pedidos que podés tomar.</p>
+    <ul id="envios-disponibles" class="lista-modern"></ul>
+  </div>
+  <div class="dashboard-card">
+    <h3>Envíos asignados</h3>
+    <p>Pedidos que tomaste.</p>
+    <ul id="envios-asignados" class="lista-modern"></ul>
+  </div>
+  <div class="dashboard-card">
+    <h3>Historial</h3>
+    <p>Entregados o cancelados.</p>
+    <ul id="envios-historial" class="lista-modern"></ul>
+  </div>
+</div>
+{% else %}
+  {% include "parciales/listas/lista_envios.html" %}
+{% endif %}
 </section>

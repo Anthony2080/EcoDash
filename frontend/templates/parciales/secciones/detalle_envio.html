@@ -17,6 +17,10 @@
     <dd>{{ envio.get_estado_display }}</dd>
     <dt>Precio</dt>
     <dd>${{ envio.precio }}</dd>
+    {% if envio.id_repartidor %}
+    <dt>Repartidor</dt>
+    <dd>{{ envio.id_repartidor.id_usuario.nombre }}</dd>
+    {% endif %}
     <dt>Solicitado</dt>
     <dd>{{ envio.fecha_solicitud }}</dd>
     {% if envio.fecha_entrega %}

@@ -1,5 +1,29 @@
 <form method="post" data-form="crear-envio">
   {% csrf_token %}
-  {{ formulario.as_p }}
+  {{ formulario.non_field_errors }}
+  <p><strong>Cliente:</strong> {{ nombre }}</p>
+  <p>
+    <label for="id_direccion_origen">Dirección de origen</label>
+    {{ formulario.direccion_origen }}
+  </p>
+  <p>
+    <label for="id_direccion_destino">Dirección de destino</label>
+    {{ formulario.direccion_destino }}
+  </p>
+  <p>
+    <label for="id_distancia_km">Distancia (km)</label>
+    {{ formulario.distancia_km }}
+  </p>
+  <p>
+    <label for="id_peso_kg">Peso (kg)</label>
+    {{ formulario.peso_kg }}
+  </p>
+  <div style="display:none">
+    {{ formulario.lat_origen }}
+    {{ formulario.lng_origen }}
+    {{ formulario.lat_destino }}
+    {{ formulario.lng_destino }}
+  </div>
+  <p>Precio estimado: <strong id="precio-estimado">$0</strong></p>
   <button class="btn btn-accion" type="submit"><i class="hgi-stroke hgi-save-01"></i> Guardar</button>
 </form>

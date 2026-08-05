@@ -95,6 +95,7 @@ const API = (() => {
       distanciaKm: distanciaKm,
       pesoKg: pesoKg,
       estado: valor(data, ["estado"], ""),
+      estadoVista: valor(data, ["estado_vista"], valor(data, ["estado"], "")),
       precio: valor(data, ["precio"], ""),
       fechaSolicitud: fechaSolicitud,
       fechaEntrega: fechaEntrega,
@@ -176,6 +177,15 @@ const API = (() => {
         method: "POST",
         body: JSON.stringify(normalizarEnvioEntrada(datos)),
       }).then(normalizarEnvio);
+    },
+    tomarEnvio: function (id) {
+      return peticion("/api/envios/" + id + "/tomar/", { method: "POST" }).then(normalizarEnvio);
+    },
+    cancelarEnvio: function (id) {
+      return peticion("/api/envios/" + id + "/cancelar/", { method: "POST" }).then(normalizarEnvio);
+    },
+    reSolicitarEnvio: function (id) {
+      return peticion("/api/envios/" + id + "/re-solicitar/", { method: "POST" }).then(normalizarEnvio);
     },
     obtenerPagos: function () {
       return peticion("/api/pagos/").then(function (lista) {

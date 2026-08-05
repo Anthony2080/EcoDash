@@ -7,11 +7,11 @@
   <title>{% block titulo %}EcoDash{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
   <link rel="stylesheet" href="https://use.hugeicons.com/font/icons.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="{% static 'vendor/leaflet/leaflet.css' %}">
 </head>
 <body class="{% block clase_body %}{% endblock %}">
   {% block cuerpo %}{% endblock %}
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="{% static 'vendor/leaflet/leaflet.js' %}"></script>
   {% block scripts %}{% endblock %}
 </body>
 </html>

@@ -5,7 +5,14 @@
       <strong>Envío #{{ envio.id_envio }}</strong>
       <span class="tag">{{ envio.get_estado_display|default:envio.estado }}</span>
     </span>
-    <a href="{% url 'envios:detalle' envio.id_envio %}">Ver detalle</a>
+    <span>
+      <a href="{% url 'envios:detalle' envio.id_envio %}">Ver detalle</a>
+      {% if envio.estado == "cancelado" %}
+      <button class="btn btn-outline btn-re-solicitar" data-id="{{ envio.id_envio }}">Re-solicitar</button>
+      {% elif envio.estado != "entregado" %}
+      <button class="btn btn-outline btn-cancelar" data-id="{{ envio.id_envio }}">Cancelar</button>
+      {% endif %}
+    </span>
   </li>
   {% empty %}
   <li>No hay envíos registrados.</li>
